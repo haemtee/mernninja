@@ -20,7 +20,7 @@ const loginUser = async (req, res) => {
             updateAt : user.updateAt
         }
 
-        return res.status(200).json({ status: 'success', msg: 'user created', data, token })
+        return res.status(200).json({ status: 'success', msg: 'user login', data, token })
     } catch (error) {
         return res.status(400).json({ status: 'error', msg: error.message })
     }

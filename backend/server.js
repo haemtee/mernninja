@@ -8,6 +8,7 @@ const workoutRoutes = require('./routes/workout')
 const userRoutes = require('./routes/user')
 
 const app = express();
+// const http = require('http').Server(app);
 
 // middleware
 app.use(cors())
@@ -27,8 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         //listen express
         app.listen(process.env.PORT, () => {
-            console.log('db connected & app listening on port ' + process.env.PORT 
-            + '\nhttp://localhost:4000/api/workout')
+            console.log('db connected & app listening on port ' + process.env.PORT )
         })
     })
     .catch((err) => console.log(err))
