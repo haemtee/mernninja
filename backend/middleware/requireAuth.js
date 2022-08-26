@@ -10,7 +10,7 @@ const requireAuth = async (req, res, next) => {
 
     try {
         const { _id } = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = userModel.findOne({ _id }).select({ _id })
+        req.user = await userModel.findOne({ _id }).select({ _id })
 
         next()
 

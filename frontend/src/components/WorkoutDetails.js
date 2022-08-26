@@ -3,13 +3,21 @@ import axios from 'axios'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 
 const WorkoutDetails = ({ workout }) => {
     const { dispatch } = useWorkoutsContext()
+    const { user } = useAuthContext()
+
+
     const handleClick = async (e) => {
+        if (!user) {
+            return
+        }
+       
         try {
-            const res = await axios.delete(`${process.env.REACT_APP_BASE_API_URL}/api/workout/${workout._id}`)
+            const res = await axios.delete(`${process.env.REACT_APP_BASE_API_URL}/api/workout/${workout._id}`, { headers: { Authorization: `Bearer ${user.token}` } })
             if (res.status === 200) {
                 dispatch({ type: 'DELETE_WORKOUT', payload: res.data.data })
             }
